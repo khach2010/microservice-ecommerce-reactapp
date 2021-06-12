@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: microservice-project
+build:
+  artifacts:
+    - image: us.gcr.io/ticketing-dev-315713/auth
+      context: ticketing/auth
+      docker:
+        dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+      - ticketing/infra/k8s/auth-depl.yaml
+      - ticketing/infra/k8s/ingress-srv.yaml
