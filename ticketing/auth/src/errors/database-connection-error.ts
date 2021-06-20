@@ -1,4 +1,5 @@
 export class DatabaseConnectionError extends Error {
+  statusCode = 500
   reason = 'Error connection to database' 
 
   constructor() {
@@ -6,4 +7,8 @@ export class DatabaseConnectionError extends Error {
 
     Object.setPrototypeOf(this, DatabaseConnectionError.prototype)
   }
-}
+
+  serializeErrors() {
+    return [{message: this.reason}]
+  }
+} 
